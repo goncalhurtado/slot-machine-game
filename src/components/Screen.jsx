@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const Screen = ({ items, play }) => {
-  const [count, setCount] = useState(0);
+const Screen = ({ items, play, game, setGame, count, setCount }) => {
   const [intId, setIntId] = useState(null);
   const countRef = useRef(count);
+
+  const prevItem = count === 0 ? items[10] : items[count - 1];
+  const currentItem = items[count];
+  const nextItem = count === 10 ? items[0] : items[count + 1];
 
   useEffect(() => {
     countRef.current = count;
@@ -18,7 +21,7 @@ const Screen = ({ items, play }) => {
           } else if (countRef.current >= 10) {
             setCount(0);
           }
-        }, 1000)
+        }, 100)
       );
     } else if (intId) {
       clearInterval(intId);
@@ -34,26 +37,40 @@ const Screen = ({ items, play }) => {
 
   return (
     <div className="screen">
-      <div className="ironTop">{play ? "play es true" : "play es false"}</div>
-      <div className="ironBotom">{count}</div>
+      <div className="ironTop"></div>
+      <div className="ironBotom"></div>
       <div className="screen__col">
         <div className="screen__col__item">
-          {count === 0 ? items[10] : items[count - 1]}
+          {!game.col1.move ? game.col1.prev : prevItem}
         </div>
-        <div className="screen__col__item">{items[count]}</div>
         <div className="screen__col__item">
-          {count === 10 ? items[0] : items[count + 1]}
+          {!game.col1.move ? game.col1.item : currentItem}
+        </div>
+        <div className="screen__col__item">
+          {!game.col1.move ? game.col1.next : nextItem}
         </div>
       </div>
       <div className="screen__col">
-        <div className="screen__col__item">b</div>
-        <div className="screen__col__item">b</div>
-        <div className="screen__col__item">b</div>
+        <div className="screen__col__item">
+          {!game.col2.move ? game.col2.prev : prevItem}
+        </div>
+        <div className="screen__col__item">
+          {!game.col2.move ? game.col2.item : currentItem}
+        </div>
+        <div className="screen__col__item">
+          {!game.col2.move ? game.col2.next : nextItem}
+        </div>
       </div>
       <div className="screen__col">
-        <div className="screen__col__item">b</div>
-        <div className="screen__col__item">b</div>
-        <div className="screen__col__item">b</div>
+        <div className="screen__col__item">
+          {!game.col3.move ? game.col3.prev : prevItem}
+        </div>
+        <div className="screen__col__item">
+          {!game.col3.move ? game.col3.item : currentItem}
+        </div>
+        <div className="screen__col__item">
+          {!game.col3.move ? game.col3.next : nextItem}
+        </div>
       </div>
     </div>
   );
