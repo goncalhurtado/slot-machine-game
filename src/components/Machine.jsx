@@ -3,17 +3,17 @@ import Screen from "./Screen.jsx";
 
 const Machine = () => {
   const [items, setItems] = useState([
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
+    "🍎",
+    "🍐",
+    "🍉",
+    "🥝",
+    "🍇",
+    "🥑",
+    "🍊",
+    "🍆",
+    "🍍",
+    "🍅",
+    "🍌",
   ]);
 
   const [stop, setStop] = useState(false);

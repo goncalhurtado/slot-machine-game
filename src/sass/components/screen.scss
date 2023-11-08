@@ -38,15 +38,17 @@
         &__item {
             &:first-child {
                 z-index: 0;
+                height: 67px;
             }
 
             &:nth-child(2) {
                 z-index: 0;
-                font-size: 60px;
+                height: 67px;
             }
 
             &:nth-child(3) {
                 z-index: 0;
+                height: 67px;
             }
         }
     }

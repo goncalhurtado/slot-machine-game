@@ -13,12 +13,12 @@ const Screen = ({ items, play }) => {
     if (play) {
       setIntId(
         setInterval(() => {
-          if (countRef.current < 9) {
+          if (countRef.current < 10) {
             setCount((prevCount) => prevCount + 1);
-          } else if (countRef.current >= 9) {
+          } else if (countRef.current >= 10) {
             setCount(0);
           }
-        }, 100)
+        }, 1000)
       );
     } else if (intId) {
       clearInterval(intId);
@@ -35,11 +35,15 @@ const Screen = ({ items, play }) => {
   return (
     <div className="screen">
       <div className="ironTop">{play ? "play es true" : "play es false"}</div>
-      <div className="ironBotom"></div>
+      <div className="ironBotom">{count}</div>
       <div className="screen__col">
-        <div className="screen__col__item">{items[count - 1]}</div>
+        <div className="screen__col__item">
+          {count === 0 ? items[10] : items[count - 1]}
+        </div>
         <div className="screen__col__item">{items[count]}</div>
-        <div className="screen__col__item">{items[count + 1]}</div>
+        <div className="screen__col__item">
+          {count === 10 ? items[0] : items[count + 1]}
+        </div>
       </div>
       <div className="screen__col">
         <div className="screen__col__item">b</div>
