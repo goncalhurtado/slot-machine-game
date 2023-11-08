@@ -1,3 +1,66 @@
-// .probando {
-//     background-color: red;
-// }
+.machine {
+    margin-top: 120px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    .head {
+        position: absolute;
+        width: 340px;
+        height: 100px;
+        background-color: rgb(182, 1, 1);
+        top: -100px;
+        border-radius: 500px 500px 0px 0px;
+        border: 5px solid black;
+        border-bottom: none;
+
+        h1 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: white;
+            margin: 0px;
+            padding: 0px;
+            margin-top: 40px;
+        }
+    }
+
+    &__front {
+        width: 340px;
+        background-color: rgb(182, 1, 1);
+        border: 5px solid black;
+        border-top: none;
+        border-bottom: none;
+        display: flex;
+        justify-content: center;
+
+        &__bezel {
+            background-color: rgb(182, 1, 1);
+        }
+    }
+
+    .back {
+        position: absolute;
+        width: 340px;
+        height: 100px;
+        background-color: rgb(182, 1, 1);
+        border: 5px solid black;
+        bottom: -100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__play {
+            background-color: green;
+            padding: 10px;
+            margin-right: 5px;
+            color: white;
+        }
+
+        &__stop {
+            background-color: green;
+            padding: 10px;
+            margin-right: 5px;
+            color: white;
+        }
+    }
+}
