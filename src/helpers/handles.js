@@ -1,6 +1,6 @@
 import { items } from "./items";
 
-export const handleStop = (game, setGame, control, setControl, count) => {
+export const handleStop = (game, setGame, control, setControl, count, setResult) => {
     if (!game.col1.selected) {
         setGame({
             ...game,
@@ -50,24 +50,37 @@ export const handleStop = (game, setGame, control, setControl, count) => {
                 move: false,
             },
         });
+
         setControl({
             ...control,
             stop: !control.stop,
             play: false,
         })
 
+        if (game.col1.item === game.col2.item &&
+            game.col2.item === items[count]) {
+            return setResult("win")
+        } else {
+            setResult("lose")
+        }
+
 
         return;
     }
+
+
+
     setControl({
         ...control,
         stop: !control.stop,
         play: false,
     })
+
 };
 
 
-export const handlePlay = (setControl, control, setGame, game) => {
+export const handlePlay = (setControl, control, setGame, game, setResult) => {
+    setResult("")
     setControl({
         ...control,
         play: true,

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Screen from "./Screen.jsx";
 import { items } from "../helpers/items.js";
 import { handleStop, handlePlay } from "../helpers/handles.js";
-const Machine = ({ game, setGame }) => {
+const Machine = ({ game, setGame, result, setResult }) => {
   const [count, setCount] = useState(0);
   const [control, setControl] = useState({
     play: false,
@@ -16,10 +16,15 @@ const Machine = ({ game, setGame }) => {
         <h2 style={{ color: "white" }}>Game Machine!</h2>
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
+            margin: "auto",
+            marginTop: "5px",
+            backgroundColor: "white",
+            width: "50%",
           }}
-        ></div>
+        >
+          {result === "win" && <h2 style={{ color: "green" }}>You Win!</h2>}
+          {result === "lose" && <h2 style={{ color: "red" }}>You Lose!</h2>}
+        </div>
       </div>
       <div className="machine__front">
         <div className="machine__front__bezel">
@@ -59,14 +64,19 @@ const Machine = ({ game, setGame }) => {
           className="back__play"
           type="button"
           value="Play"
-          onClick={() => handlePlay(setControl, control, setGame, game)}
+          onClick={() =>
+            handlePlay(setControl, control, setGame, game, setResult)
+          }
           disabled={control.play}
         />
         <input
           className="back__stop"
           type="button"
           value="Stop"
-          onClick={() => handleStop(game, setGame, control, setControl, count)}
+          onClick={() =>
+            handleStop(game, setGame, control, setControl, count, setResult)
+          }
+          disabled={!control.play}
         />
       </div>
     </div>
