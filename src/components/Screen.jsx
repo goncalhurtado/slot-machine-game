@@ -21,7 +21,7 @@ const Screen = ({ items, control, game, count, setCount }) => {
           } else if (countRef.current >= 10) {
             setCount(0);
           }
-        }, control.velocity)
+        }, 1000)
       );
     } else if (intId) {
       clearInterval(intId);

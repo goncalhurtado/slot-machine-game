@@ -3,6 +3,7 @@ import "./App.css";
 import Machine from "./components/Machine";
 
 function App() {
+  const [result, setResult] = useState("");
   const [game, setGame] = useState({
     col1: {
       prev: "🍌",
@@ -29,7 +30,12 @@ function App() {
 
   return (
     <>
-      <Machine game={game} setGame={setGame} />
+      <Machine
+        game={game}
+        setGame={setGame}
+        result={result}
+        setResult={setResult}
+      />
     </>
   );
 }
