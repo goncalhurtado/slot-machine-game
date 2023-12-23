@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const Screen = ({ items, play, game, setGame, count, setCount }) => {
+const Screen = ({ items, control, game, count, setCount }) => {
   const [intId, setIntId] = useState(null);
   const countRef = useRef(count);
 
@@ -13,7 +13,7 @@ const Screen = ({ items, play, game, setGame, count, setCount }) => {
   }, [count]);
 
   useEffect(() => {
-    if (play) {
+    if (control.play) {
       setIntId(
         setInterval(() => {
           if (countRef.current < 10) {
@@ -21,7 +21,7 @@ const Screen = ({ items, play, game, setGame, count, setCount }) => {
           } else if (countRef.current >= 10) {
             setCount(0);
           }
-        }, 100)
+        }, control.velocity)
       );
     } else if (intId) {
       clearInterval(intId);
@@ -33,7 +33,7 @@ const Screen = ({ items, play, game, setGame, count, setCount }) => {
         clearInterval(intId);
       }
     };
-  }, [play]);
+  }, [control.play]);
 
   return (
     <div className="screen">

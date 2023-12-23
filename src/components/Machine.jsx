@@ -1,141 +1,31 @@
 import React, { useState } from "react";
 import Screen from "./Screen.jsx";
-
-const Machine = () => {
-  const items = [
-    "🍎",
-    "🍐",
-    "🍉",
-    "🥝",
-    "🍇",
-    "🥑",
-    "🍊",
-    "🍆",
-    "🍍",
-    "🍅",
-    "🍌",
-  ];
-
-  const [game, setGame] = useState({
-    col1: {
-      prev: "🍌",
-      item: "🍎",
-      next: "🍐",
-      selected: false,
-      move: false,
-    },
-    col2: {
-      prev: "🍌",
-      item: "🍎",
-      next: "🍐",
-      selected: false,
-      move: false,
-    },
-    col3: {
-      prev: "🍌",
-      item: "🍎",
-      next: "🍐",
-      selected: false,
-      move: false,
-    },
-  });
-
+import { items } from "../helpers/items.js";
+import { handleStop, handlePlay } from "../helpers/handles.js";
+const Machine = ({ game, setGame }) => {
   const [count, setCount] = useState(0);
-  const [stop, setStop] = useState(false);
-  const [play, setPlay] = useState(false);
-
-  const handleStop = () => {
-    if (!game.col1.selected) {
-      setGame({
-        ...game,
-        col1: {
-          prev: count === 0 ? items[10] : items[count - 1],
-          item: items[count],
-          next: count === 10 ? items[0] : items[count + 1],
-          selected: true,
-          move: false,
-        },
-      });
-
-      setStop(!stop);
-      //   setPlay(false);
-
-      return;
-    }
-
-    if (!game.col2.selected) {
-      setGame({
-        ...game,
-        col2: {
-          prev: count === 0 ? items[10] : items[count - 1],
-          item: items[count],
-          next: count === 10 ? items[0] : items[count + 1],
-          selected: true,
-          move: false,
-        },
-      });
-      setStop(!stop);
-
-      return;
-    }
-    if (!game.col3.selected) {
-      setGame({
-        ...game,
-        col3: {
-          prev: count === 0 ? items[10] : items[count - 1],
-          item: items[count],
-          next: count === 10 ? items[0] : items[count + 1],
-          selected: true,
-          move: false,
-        },
-      });
-      setStop(!stop);
-      setPlay(false);
-
-      return;
-    }
-    setStop(!stop);
-    setPlay(false);
-  };
-
-  // PLAY
-
-  const handlePlay = () => {
-    setPlay(true);
-    setGame({
-      ...game,
-      col1: {
-        move: true,
-      },
-      col2: {
-        move: true,
-      },
-      col3: {
-        move: true,
-      },
-    });
-  };
+  const [control, setControl] = useState({
+    play: false,
+    stop: false,
+    velocity: 100,
+  });
 
   return (
     <div className="machine">
       <div className="head">
-        <h2 style={{ color: "white" }}>Que quiere Timba?</h2>
+        <h2 style={{ color: "white" }}>Game Machine!</h2>
         <div
           style={{
             display: "flex",
             justifyContent: "center",
           }}
-        >
-          <h4>{game.col1.selected && game.col1.item}</h4>
-          <h4>{game.col2.selected && game.col2.item}</h4>
-          <h4>{game.col3.selected && game.col3.item}</h4>
-        </div>
+        ></div>
       </div>
       <div className="machine__front">
         <div className="machine__front__bezel">
           <Screen
             items={items}
-            play={play}
+            control={control}
             game={game}
             count={count}
             setCount={setCount}
@@ -143,17 +33,40 @@ const Machine = () => {
         </div>
       </div>
       <div className="back">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginRight: "10px",
+          }}
+        >
+          <label htmlFor="">Velocity</label>
+          <select
+            name="velocity"
+            id="velocity"
+            defaultValue={control.velocity}
+            onChange={(e) =>
+              setControl({ ...control, velocity: e.target.value })
+            }
+            disabled={control.play}
+          >
+            <option value={200}>Easy</option>
+            <option value={100}>Normal</option>
+            <option value={50}>Hard</option>
+          </select>
+        </div>
         <input
           className="back__play"
           type="button"
           value="Play"
-          onClick={handlePlay}
+          onClick={() => handlePlay(setControl, control, setGame, game)}
+          disabled={control.play}
         />
         <input
           className="back__stop"
           type="button"
           value="Stop"
-          onClick={handleStop}
+          onClick={() => handleStop(game, setGame, control, setControl, count)}
         />
       </div>
     </div>
