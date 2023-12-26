@@ -63,4 +63,17 @@
             color: white;
         }
     }
+
+    .bottom {
+        position: absolute;
+        bottom: -200px;
+        width: 340px;
+        height: 100px;
+        background-color: rgb(182, 1, 1);
+        border: 5px solid black;
+        border-top: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
