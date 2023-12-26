@@ -14,7 +14,7 @@ const Machine = ({ game, setGame, result, setResult }) => {
     <>
       <div className="machine">
         <div className="head">
-          <h2 style={{ color: "white" }}>Game Machine!</h2>
+          <h2 style={{ color: "white" }}>React Slot Machine</h2>
           <div
             style={{
               margin: "auto",
